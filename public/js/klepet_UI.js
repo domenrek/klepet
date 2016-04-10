@@ -98,7 +98,15 @@ $(document).ready(function() {
       $('#poslji-sporocilo').focus();
     });
   });
-
+  
+  socket.on('dregljaj',function(dregljaj) {
+    $('#vsebina').jrumble().trigger('startRumble');
+    $('#vsebina').delay(1500).queue(function(){
+       $('#vsebina').jrumble().trigger('stopRumble');
+       $('#vsebina').dequeue();
+    });
+  });
+    
   socket.on('uporabniki', function(uporabniki) {
     $('#seznam-uporabnikov').empty();
     for (var i=0; i < uporabniki.length; i++) {
